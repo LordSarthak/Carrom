@@ -1,8 +1,7 @@
 import { motion } from 'motion/react';
 import { useNavigate } from 'react-router-dom';
-import {Gamepad2, Plus, Users, Gift, TrendingUp, Clock, Trophy} from 'lucide-react';
+import { Gamepad2, Plus, Users, Gift, TrendingUp, Clock, Trophy } from 'lucide-react';
 import { useState } from 'react';
-
 import { Button } from '../components/common/Button';
 import { Card } from '../components/common/Card';
 import { Input } from '../components/common/Input';
@@ -12,53 +11,19 @@ import { useAuthStore } from '../store/authStore';
 export function Dashboard() {
     const navigate = useNavigate();
     const { user } = useAuthStore();
-
     const [showJoinModal, setShowJoinModal] = useState(false);
     const [roomCode, setRoomCode] = useState('');
 
     const stats = [
-        {
-            label: 'Matches Played',
-            value: user?.matchesPlayed || 0,
-            icon: Gamepad2,
-            color: '#00d9ff',
-        },
-        {
-            label: 'Win Rate',
-            value: `${user?.winRate || 0}%`,
-            icon: Trophy,
-            color: '#fbbf24',
-        },
-        {
-            label: 'Level',
-            value: user?.level || 1,
-            icon: TrendingUp,
-            color: '#00ff88',
-        },
+        { label: 'Matches Played', value: user?.matchesPlayed || 0, icon: Gamepad2, color: '#00d9ff' },
+        { label: 'Win Rate', value: `${user?.winRate || 0}%`, icon: Trophy, color: '#fbbf24' },
+        { label: 'Level', value: user?.level || 1, icon: TrendingUp, color: '#00ff88' },
     ];
 
     const recentMatches = [
-        {
-            id: 1,
-            opponent: 'Player123',
-            result: 'won',
-            score: '25-18',
-            time: '2 hours ago',
-        },
-        {
-            id: 2,
-            opponent: 'ProGamer',
-            result: 'lost',
-            score: '15-25',
-            time: '5 hours ago',
-        },
-        {
-            id: 3,
-            opponent: 'Champion99',
-            result: 'won',
-            score: '25-20',
-            time: '1 day ago',
-        },
+        { id: 1, opponent: 'Player123', result: 'won', score: '25-18', time: '2 hours ago' },
+        { id: 2, opponent: 'ProGamer', result: 'lost', score: '15-25', time: '5 hours ago' },
+        { id: 3, opponent: 'Champion99', result: 'won', score: '25-20', time: '1 day ago' },
     ];
 
     const handleCreateRoom = () => {
@@ -90,20 +55,12 @@ export function Dashboard() {
                                 <h1 className="text-3xl font-bold text-white mb-2">
                                     Welcome back, {user?.username}!
                                 </h1>
-
-                                <p className="text-gray-400">
-                                    Ready for your next match?
-                                </p>
+                                <p className="text-gray-400">Ready for your next match?</p>
                             </div>
-
                             <div className="flex flex-wrap gap-3">
-                                <Button
-                                    onClick={handleQuickPlay}
-                                    icon={<Gamepad2 size={20} />}
-                                >
+                                <Button onClick={handleQuickPlay} icon={<Gamepad2 size={20} />}>
                                     Quick Play
                                 </Button>
-
                                 <Button
                                     variant="secondary"
                                     onClick={handleCreateRoom}
@@ -111,7 +68,6 @@ export function Dashboard() {
                                 >
                                     Create Room
                                 </Button>
-
                                 <Button
                                     variant="outline"
                                     onClick={() => setShowJoinModal(true)}
@@ -137,24 +93,13 @@ export function Dashboard() {
                                 <div className="flex items-center gap-4">
                                     <div
                                         className="p-3 rounded-xl"
-                                        style={{
-                                            backgroundColor: `${stat.color}20`,
-                                        }}
+                                        style={{ backgroundColor: `${stat.color}20` }}
                                     >
-                                        <stat.icon
-                                            size={24}
-                                            style={{ color: stat.color }}
-                                        />
+                                        <stat.icon size={24} style={{ color: stat.color }} />
                                     </div>
-
                                     <div>
-                                        <p className="text-gray-400 text-sm">
-                                            {stat.label}
-                                        </p>
-
-                                        <p className="text-2xl font-bold text-white">
-                                            {stat.value}
-                                        </p>
+                                        <p className="text-gray-400 text-sm">{stat.label}</p>
+                                        <p className="text-2xl font-bold text-white">{stat.value}</p>
                                     </div>
                                 </div>
                             </Card>
@@ -166,10 +111,7 @@ export function Dashboard() {
                     {/* Recent Matches */}
                     <div className="lg:col-span-2">
                         <Card>
-                            <h2 className="text-xl font-semibold text-white mb-4">
-                                Recent Matches
-                            </h2>
-
+                            <h2 className="text-xl font-semibold text-white mb-4">Recent Matches</h2>
                             <div className="space-y-3">
                                 {recentMatches.map((match) => (
                                     <motion.div
@@ -183,19 +125,14 @@ export function Dashboard() {
                                                     {match.opponent.charAt(0)}
                                                 </span>
                                             </div>
-
                                             <div>
-                                                <p className="text-white font-medium">
-                                                    {match.opponent}
-                                                </p>
-
+                                                <p className="text-white font-medium">{match.opponent}</p>
                                                 <div className="flex items-center gap-2 text-sm text-gray-400">
                                                     <Clock size={14} />
                                                     <span>{match.time}</span>
                                                 </div>
                                             </div>
                                         </div>
-
                                         <div className="text-right">
                                             <span
                                                 className={`text-sm font-semibold px-3 py-1 rounded-full ${match.result === 'won'
@@ -203,14 +140,9 @@ export function Dashboard() {
                                                         : 'bg-[#ff3366]/20 text-[#ff3366]'
                                                     }`}
                                             >
-                                                {match.result === 'won'
-                                                    ? 'Won'
-                                                    : 'Lost'}
+                                                {match.result === 'won' ? 'Won' : 'Lost'}
                                             </span>
-
-                                            <p className="text-gray-400 text-sm mt-1">
-                                                {match.score}
-                                            </p>
+                                            <p className="text-gray-400 text-sm mt-1">{match.score}</p>
                                         </div>
                                     </motion.div>
                                 ))}
@@ -223,15 +155,10 @@ export function Dashboard() {
                         <Card neonGlow className="cursor-pointer" hover>
                             <div className="text-center">
                                 <Gift className="w-12 h-12 mx-auto mb-3 text-[#fbbf24]" />
-
                                 <h3 className="text-lg font-semibold text-white mb-2">
                                     Daily Reward
                                 </h3>
-
-                                <p className="text-gray-400 text-sm mb-4">
-                                    Claim your daily bonus!
-                                </p>
-
+                                <p className="text-gray-400 text-sm mb-4">Claim your daily bonus!</p>
                                 <Button fullWidth variant="secondary">
                                     Claim 500 Coins
                                 </Button>
@@ -242,7 +169,6 @@ export function Dashboard() {
                             <h3 className="text-lg font-semibold text-white mb-4">
                                 Friends Online
                             </h3>
-
                             <div className="space-y-3">
                                 {['Alice', 'Bob', 'Charlie'].map((friend) => (
                                     <div
@@ -252,15 +178,10 @@ export function Dashboard() {
                                         <div className="flex items-center gap-2">
                                             <div className="relative">
                                                 <div className="w-8 h-8 bg-gradient-to-br from-[#00d9ff] to-[#00ff88] rounded-full" />
-
                                                 <div className="absolute bottom-0 right-0 w-3 h-3 bg-[#00ff88] rounded-full border-2 border-[#0a0e1a]" />
                                             </div>
-
-                                            <span className="text-white text-sm">
-                                                {friend}
-                                            </span>
+                                            <span className="text-white text-sm">{friend}</span>
                                         </div>
-
                                         <Button size="sm" variant="ghost">
                                             Invite
                                         </Button>
@@ -286,7 +207,6 @@ export function Dashboard() {
                         onChange={(e) => setRoomCode(e.target.value)}
                         maxLength={6}
                     />
-
                     <Button fullWidth onClick={handleJoinRoom}>
                         Join Room
                     </Button>
